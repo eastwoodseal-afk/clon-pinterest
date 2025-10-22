@@ -1,0 +1,425 @@
+/* Estilos para todo el cuerpo de la página */
+body {
+    background-color: #000000;
+    font-family: Arial, sans-serif;
+    color: #ffffff;
+    margin: 0;
+    padding-top: 20px;
+}
+
+h1 {
+    color: #e60023;
+    text-align: center;
+}
+
+/* --- BARRA DE NAVEGACIÓN --- */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #000000;
+    box-shadow: 0 2px 4px rgba(255,255,255,0.1);
+    margin-bottom: 20px;
+    width: 80%;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+nav h1 {
+    margin: 0;
+    padding: 0 10px;
+    color: #e60023;
+}
+
+#auth-buttons, #user-info {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* --- ESTILOS PARA EL MENÚ DE USUARIO --- */
+#user-menu {
+    position: relative;
+}
+
+.user-menu-btn {
+    background-color: #444;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: #ffffff;
+    transition: background-color 0.2s, transform 0.2s;
+    gap: 2px; /* <-- AÑADIDO: Un pequeño espacio entre el icono y el texto */
+}
+
+.user-menu-btn:hover {
+    background-color: #555;
+    transform: scale(1.05);
+}
+
+/* <-- CORREGIDO: Estilos para el SVG dentro del botón */
+.user-menu-btn svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0; /* Evita que el icono se encoja */
+}
+
+/* <-- CORREGIDO: Estilos para el span con la inicial dentro del botón */
+.user-menu-btn span {
+    font-size: 16px; /* Un poco más pequeño para que quepe bien */
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 1; /* Asegura que el texto no tenga espacio extra */
+}
+
+/* Las siguientes reglas ya no son necesarias y se pueden eliminar */
+/*
+.user-menu-btn .user-icon {
+    display: none;
+}
+
+.user-menu-btn #user-initial {
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.user-menu-btn:has(#user-initial:empty) .user-icon {
+    display: block;
+}
+*/
+
+/* Estilos para el menú desplegable */
+.user-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #3d3a3a;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    min-width: 200px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+
+/* Clase para mostrar el dropdown (¡CORREGIDA!) */
+.user-dropdown.show {
+    display: block !important; /* <-- ¡AÑADE ESTA LÍNEA! */
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.user-dropdown p {
+    padding: 10px 15px;
+    margin: 0;
+    font-size: 14px;
+    color: #ccc;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.user-dropdown hr {
+    border: none;
+    border-top: 1px solid #555;
+    margin: 5px 0;
+}
+
+.user-dropdown button {
+    width: 100%;
+    background: none;
+    border: none;
+    color: #ffffff;
+    padding: 12px 15px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.user-dropdown button:hover {
+    background-color: #555;
+}
+
+/* --- BOTÓN DE VOLVER --- */
+#back-to-all-btn {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0;
+    margin-right: 15px;
+    transition: color 0.2s;
+}
+
+#back-to-all-btn:hover {
+    color: #e60023;
+}
+
+/* --- CONTENEDOR DE PINES --- */
+.pin-container {
+    column-width: 200px;
+    column-gap: 16px;
+    width: 80%;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.pin {
+    border: 1px solid #333333;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #3d3a3a;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    break-inside: avoid;
+    margin-bottom: 16px;
+}
+
+.pin img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.pin p {
+    padding: 8px;
+    font-size: 14px;
+    margin: 0;
+}
+
+/* --- MEDIA QUERIES PARA RESPONSIVIDAD --- */
+@media (max-width: 1200px) {
+    .pin-container { column-width: 250px; }
+}
+@media (max-width: 768px) {
+    .pin-container { column-count: 2; column-width: auto; }
+    nav { flex-direction: column; gap: 10px; }
+}
+@media (max-width: 480px) {
+    .pin-container { column-count: 1; }
+}
+
+/* --- ESTILOS PARA MODALES Y FORMULARIOS --- */
+.hidden { display: none !important; }
+.modal {
+    position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
+    overflow: auto; background-color: rgba(70, 66, 70, 0.5);
+}
+.modal-content {
+    background-color: #5e5959; margin: 15% auto; padding: 20px; border: 1px solid #888;
+    width: 80%; max-width: 400px; border-radius: 8px; position: relative;
+}
+.close-btn, .close-btn-create {
+    color: #aaa; position: absolute; top: 5px; right: 15px; font-size: 28px;
+    font-weight: bold; cursor: pointer;
+}
+.close-btn:hover, .close-btn:focus, .close-btn-create:hover, .close-btn-create:focus {
+    color: #fff; text-decoration: none;
+}
+.auth-form, #create-pin-form {
+    display: flex; flex-direction: column; gap: 15px;
+}
+.auth-form h2, .modal-content h2 {
+    text-align: center; margin-top: 0;
+}
+.auth-form input, .auth-form button, .form-group input, .form-group textarea, #create-pin-form button[type="submit"] {
+    padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px;
+}
+.auth-form button, #create-pin-btn, #create-pin-form button[type="submit"] {
+    background-color: #e60023; color: white; border: none; cursor: pointer;
+    transition: background-color 0.2s;
+}
+.auth-form button:hover, #create-pin-btn:hover, #create-pin-form button[type="submit"]:hover {
+    background-color: #c5011d;
+}
+#google-login-btn {
+    background-color: #4285f4; color: white;
+}
+#google-login-btn:hover {
+    background-color: #357ae8;
+}
+.auth-form p {
+    text-align: center; font-size: 14px;
+}
+.auth-form a {
+    color: #007bff; text-decoration: none;
+}
+.auth-form a:hover {
+    text-decoration: underline;
+}
+.form-group {
+    display: flex; flex-direction: column;
+}
+.form-group label {
+    margin-bottom: 5px; font-weight: bold;
+}
+
+/* --- Estilos para el Modal de Detalles del Pin --- */
+.pin-detail-content {
+    display: flex;
+    max-width: 900px;
+    width: 90%;
+    margin: 5% auto;
+    background-color: #3d3a3a;
+}
+
+.pin-detail-image-container {
+    flex: 1;
+    max-width: 60%;
+}
+
+.pin-detail-image-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px 0 0 8px;
+    display: block;
+}
+
+.pin-detail-info {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.pin-detail-info h2 {
+    margin-top: 0;
+    color: #ffffff;
+}
+
+.pin-detail-info p {
+    color: #cccccc;
+    font-size: 14px;
+}
+
+.close-btn-detail {
+    color: #aaa;
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-btn-detail:hover,
+.close-btn-detail:focus {
+    color: #fff;
+}
+
+/* --- Media Query para el modal de detalles en móviles --- */
+@media (max-width: 768px) {
+    .pin-detail-content {
+        flex-direction: column;
+        margin: 10% auto;
+    }
+    .pin-detail-image-container {
+        max-width: 100%;
+    }
+    .pin-detail-image-container img {
+        border-radius: 8px 8px 0 0;
+    }
+}
+
+/* --- Estilos para el botón de visitar sitio web --- */
+.visit-site-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #e60023;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    text-align: center;
+    transition: background-color 0.2s;
+}
+
+.visit-site-btn:hover {
+    background-color: #c5011d;
+    color: white;
+    text-decoration: none;
+}
+/* --- Estilos para el Overlay de "Guardar Pin" (MODIFICADO) --- */
+.pin {
+    position: relative; /* Necesario para posicionar el overlay */
+}
+
+.pin-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    /* --- CAMBIOS DE POSICIÓN (ESQUINA SUPERIOR DERECHA) --- */
+    justify-content: flex-end; /* Alinea el contenido (el botón) a la derecha */
+    align-items: flex-start;     /* Alinea el contenido (el botón) arriba */
+    padding: 15px;  
+    box-sizing: border-box;           /* Añade un pequeño margen para que no toque el borde */
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.pin:hover .pin-overlay {
+    opacity: 1;
+}
+
+/* El estilo del botón (.save-pin-btn) no necesita cambios */
+.save-pin-btn {
+    background-color: #e60023;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.1s ease, background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.save-pin-btn:hover {
+    background-color: #c5011d;
+    transform: scale(1.05);
+}
+
+.save-pin-btn:active {
+    transform: scale(0.95);
+}
+/* --- Estilos para el botón de eliminar pin --- */
+.delete-pin-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #b91c1c; /* Un rojo fuerte */
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.delete-pin-btn:hover {
+    background-color: #991b1b;
+    color: white;
+}

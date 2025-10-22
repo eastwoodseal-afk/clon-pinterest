@@ -2,11 +2,130 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Clon de Pinterest</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>¡Bienvenidos a mi Clon de Pinterest!</h1>
-    <p>Pronto esta página estará llena de imágenes increíbles.</p>
+    <nav>
+        <div style="display: flex; align-items: center;">
+            <button id="back-to-all-btn" class="hidden">← Ver Todos</button>
+            <h1>Mi Clon de Pinterest</h1>
+        </div>
+        <div id="auth-buttons">
+            <button id="open-login">Iniciar Sesión</button>
+        </div>
+        <div id="user-menu" class="hidden">
+            <button id="user-menu-btn" class="user-menu-btn">
+    <span id="user-initial"></span>
+</button>
+        <div id="user-dropdown" class="user-dropdown hidden">
+              <p id="dropdown-user-email"></p>
+                  <hr>
+            <button id="my-creations-btn">Mis Creaciones</button> <!-- NUEVO BOTÓN -->
+             <button id="my-pins-btn">Mis Guardados</button> <!-- CAMBIAMOS EL TEXTO -->
+               <button id="create-pin-btn">Crear Pin</button>
+                <hr>
+                <button id="logout-btn">Cerrar Sesión</button>
+                </div>
+        </div>
+    </nav>
+
+    *<div id="auth-modal" class="modal hidden">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <div id="signup-form" class="auth-form">
+            <h2>Crear Cuenta</h2>
+            <!-- CAMPO AÑADIDO -->
+            <input type="text" id="signup-name" placeholder="Tu nombre" required>
+            <input type="email" id="signup-email" placeholder="Correo electrónico" required>
+            <input type="password" id="signup-password" placeholder="Contraseña" required>
+            <button id="signup-btn">Registrarse</button>
+            <p>¿Ya tienes cuenta? <a href="#" id="show-login">Inicia Sesión</a></p>
+        </div>
+        <div id="login-form" class="auth-form hidden">
+            <h2>Iniciar Sesión</h2>
+            <input type="email" id="login-email" placeholder="Correo electrónico" required>
+            <input type="password" id="login-password" placeholder="Contraseña" required>
+            <button id="login-btn">Entrar</button>
+            <button id="google-login-btn">Iniciar con Google</button>
+            <p>¿No tienes cuenta? <a href="#" id="show-signup">Regístrate</a></p>
+        </div>
+    </div>
+</div>
+
+    <!-- Modal para Crear Pin -->
+<div id="create-pin-modal" class="modal hidden">
+    <div class="modal-content">
+        <span class="close-btn-create">&times;</span>
+        <h2>Crear Nuevo Pin</h2>
+        
+        <!-- NUEVO: Selector de método de creación -->
+        <div class="creation-options">
+            <button id="option-file-btn" class="pin-option-btn active">Subir imagen</button>
+            <button id="option-url-btn" class="pin-option-btn">Añadir desde URL</button>
+        </div>
+
+        <form id="create-pin-form">
+            <!-- Opción 1: Subir Archivo (por defecto visible) -->
+            <div id="file-upload-section" class="creation-section">
+                <div class="form-group">
+                    <label for="pin-image-input">Selecciona una imagen</label>
+                    <input type="file" id="pin-image-input" accept="image/*">
+                </div>
+            </div>
+
+            <!-- Opción 2: Introducir URL (por defecto oculta) -->
+            <div id="url-upload-section" class="creation-section hidden">
+                <div class="form-group">
+                    <label for="pin-image-url">Introduce la URL de la imagen</label>
+                    <input type="url" id="pin-image-url" placeholder="https://ejemplo.com/imagen.jpg">
+                </div>
+            </div>
+
+            <!-- Campos comunes para ambas opciones -->
+            <div class="form-group">
+                <label for="pin-description">Descripción</label>
+                <textarea id="pin-description" rows="3" placeholder="Describe tu pin..." required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="pin-source-url">Enlace a la web original (Opcional)</label>
+                <input type="url" id="pin-source-url" placeholder="https://ejemplo.com">
+            </div>
+            <button type="submit">Subir Pin</button>
+        </form>
+    </div>
+</div>
+    
+
+    <div class="pin-container"></div>
+<!-- ... justo antes de tu <script> ... -->
+
+<!-- Modal para ver los detalles de un Pin -->
+<div id="pin-detail-modal" class="modal hidden">
+    <div class="modal-content pin-detail-content">
+        <span class="close-btn-detail">&times;</span>
+        <div class="pin-detail-image-container">
+            <img id="pin-detail-image" src="" alt="">
+        </div>
+        <div class="pin-detail-info">
+            <h2 id="pin-detail-description"></h2>
+            <p id="pin-detail-author"></p>
+            
+            <!-- NUEVO CONTENEDOR PARA LOS BOTONES DE ACCIÓN -->
+            <div class="pin-detail-actions">
+                <!-- NUEVO BOTÓN CON ICONO DE CESTO -->
+                <button id="delete-pin-btn" class="delete-pin-btn hidden" title="Eliminar Pin">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    </svg>
+                </button>
+                <a id="visit-site-btn" href="#" target="_blank" class="visit-site-btn hidden">Visitar Sitio Web</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="module" src="script.js"></script>
 </body>
 </html>
